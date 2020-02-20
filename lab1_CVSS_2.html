@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>CVSS V2</title>
+</head>
+<body>
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="https://www.el-g.com.ua/sites/default/files/calculator.png" width="30" height="30"
+             class="d-inline-block align-top" alt="">
+        Калькулятор CVSS Version 2
+    </a>
+</nav>
+<div class="container-fluid">
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                        Базовые метрики
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="jumbotron jumbotron-xl">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div style="text-align: center;">
+                                        <h2> Сложность доступа (AC)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAс('0.35')"> Высокий уровень (H)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAс('0.61')"> Средний уровень (M)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAс('0.71')"> Низкий уровень (L)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <center>
+                                        <h2> Влияние на конфиденциальность (С)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseC('0.0')"> Не оказывает (N)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseC('0.275')"> Частичная (P)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseC('0.66')"> Полная (C)
+                                            </label>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div style="text-align: center;">
+                                        <h2> Вектор доступа (AV) </h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAv('0.395')"> Локальный (L)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAv('0.646')"> Локально-сетевой (A)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAv('1.0')"> Сетевой (N)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div style="text-align: center;">
+                                        <h2>Влияние на целостность (I)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseI('0.0')"> Не оказывает (N)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseI('0.275')"> Частичная (P)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseI('0.66')"> Полная (C)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div style="text-align: center;">
+                                        <h2> Аутентификация (Au)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAu('0.45')"> Многократная (M)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAu('0.56')"> Однократная (S)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAu('0.704')"> Нулевая (N)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div style="text-align: center;">
+                                        <h2> Влияние на доступность (A)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseA('0.0')"> Не оказывает (N)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseA('0.275')"> Частичная (P)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseA('0.66')"> Полная (C)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div style="text-align: center;">
+                                <div class="card" style="width:70%; height:250px">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> Базовая оценка (BS)</h5>
+                                        <h6 id="base"></h6>
+                                        <button type="button" onclick="countBase()" class="btn btn-outline-info">
+                                            Вычислить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                        Временные метрики
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="jumbotron jumbotron-xl">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div style="text-align: center;">
+                                        <h2> Возможность использования (E)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseE('1.0')"> не определено (ND)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseE('0.85')"> теоретически (U)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseE('0.9')"> есть концепция (POC)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseE('0.95')"> есть сценарий (F)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseE('1.0')"> высокая (H)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div style="text-align: center;">
+                                        <h2> Уровень исправления (RL) </h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseRl('1.0')"> не определено (ND)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseRl('0.87')"> официальное (OF)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseRl('0.9')"> временное (TF)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseRl('0.95')"> рекомендации (W)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseRl('1.0')"> недоступно (U)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div style="text-align: center;">
+                                        <h2> Степень достоверности источника (RC)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseRc('1.0')"> не определено (ND)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseRc('0.9')"> не подтверждена (UC)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseRc('0.95')"> не доказана (UR)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseRc('1.0')"> подтверждена (C)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div style="text-align: center;">
+                                <div class="card" style="width:70%; height:250px">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> Временная оценка (TS)</h5>
+                                        <h6 id="temporal"></h6>
+                                        <button type="button" onclick="countTemporal()" class="btn btn-outline-info">
+                                            Вычислить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapseThree"
+                            aria-expanded="false" aria-controls="collapseThree">
+                        Kонтекстныe метрики
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="jumbotron jumbotron-xl">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div style="text-align: center;">
+                                        <h2> Метрика вероятности нанесения косвенного ущерба (CDP)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseCdp('0.0')"> не определено (ND)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseCdp('0.0')"> отсутствует (N)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseCdp('0.1')"> низкая (L)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseCdp('0.3')"> средняя (LM)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseCdp('0.4')"> повышенная (MH)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseCdp('0.5')"> высокая (H)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div style="text-align: center;">
+                                        <h2> Метрика плотности целей (TD) </h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseTd('1.0')"> не определено (ND)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseTd('0.0')"> отсутствует (N)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseTd('0.25')"> низкая (L)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseTd('0.75')"> средняя (M)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseTd('1.0')"> высокая (H)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align: center;"><h1>Требования к безопасности</h1></div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div style="text-align: center;">
+                                        <h2> Требования к конфиденциальности (CR)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseCr('1.0')"> не определено (ND)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseCr('0.5')"> низкая (L)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseCr('1.0')"> средняя (M)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseCr('1.51')"> высокая (H)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div style="text-align: center;">
+                                        <h2> Требования к целостности (IR)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseIr('1.0')"> не определено (ND)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseIr('0.5')"> низкая (L)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseIr('1.0')"> средняя (M)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseIr('1.51')"> высокая (H)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div style="text-align: center;">
+                                        <h2>Требования к доступности (AR)</h2>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAr('1.0')"> не определено (ND)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAr('0.5')"> низкая (L)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAr('1.0')"> средняя (M)
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" onclick="chooseAr('1.51')"> высокая (H)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div style="text-align: center;">
+                                <div class="card" style="width:70%; height:250px">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> Контекстная оценка (ES)</h5>
+                                        <h6 id="env"></h6>
+                                        <button type="button" onclick="countEnv()" class="btn btn-outline-info">
+                                            Вычислить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+
+    function chooseC(r) {
+        window.c = r
+    }
+
+    function chooseI(r) {
+        window.i = r
+    }
+
+    function chooseA(r) {
+        window.a = r;
+        countImpact();
+    }
+
+    function countImpact() {
+        window.a = parseFloat(window.a);
+        window.c = parseFloat(window.c);
+        window.i = parseFloat(window.i);
+        window.impact = 10.41 * (1 - (1 - window.c) * (1 - window.i) * (1 - window.a));
+    }
+
+    function chooseAu(r) {
+        window.au = parseFloat(r)
+    }
+
+    function chooseAv(r) {
+        window.av = parseFloat(r)
+    }
+
+    function chooseAс(r) {
+        window.ce = parseFloat(r)
+    }
+
+    function countExpl() {
+        window.expl = 20 * window.ce * window.av * window.au;
+    }
+
+    function countBase() {
+        countImpact();
+        countExpl();
+        window.f = 0;
+        if (window.impact !== 0) window.f = 1.176;
+        window.base = (((0.6 * window.impact) + (0.4 * window.expl) - 1.5) * window.f).toFixed(1);
+        if (isNaN(window.base)) document.getElementById("base").innerText = "Укажите все метрики";
+        else document.getElementById("base").innerText = window.base;
+    }
+
+    function chooseE(r) {
+        window.e = parseFloat(r)
+    }
+
+    function chooseRl(r) {
+        window.rl = parseFloat(r)
+    }
+
+    function chooseRc(r) {
+        window.rc = parseFloat(r)
+    }
+
+    function countTemporal() {
+        if (isNaN(window.base)) document.getElementById("temporal").innerText = "Вычислите базовую оценку";
+        else {
+            window.temporal = (window.base * window.e * window.rl * window.rc).toFixed(1);
+            if (isNaN(window.temporal)) document.getElementById("temporal").innerText = "Укажите все метрики";
+            else document.getElementById("temporal").innerText = window.temporal;
+        }
+    }
+
+    function chooseCdp(r) {
+        window.cdp = parseFloat(r)
+    }
+
+    function chooseTd(r) {
+        window.td = parseFloat(r)
+    }
+
+    function chooseCr(r) {
+        window.cr = parseFloat(r)
+    }
+
+    function chooseIr(r) {
+        window.ir = parseFloat(r)
+    }
+
+    function chooseAr(r) {
+        window.ar = parseFloat(r)
+    }
+
+    function countAdImpact() {
+        window.adImpact = Math.min(10, 10.41 * (1 - (1 - window.c * window.cr) * (1 - window.i * window.ir) * (1 - window.a * window.ar)));
+    }
+
+    function countAdBase() {
+        window.adBase = (((0.6 * window.adImpact) + (0.4 * window.expl) - 1.5) * window.f);
+    }
+
+    function countAdTemp() {
+        window.adTemp = window.adBase * window.e * window.rl * window.rc;
+    }
+
+    function countEnv() {
+        if (isNaN(window.temporal)) document.getElementById("temporal").innerText = "Вычислите временную оценку";
+        else {
+            countAdImpact();
+            countAdBase();
+            countAdTemp();
+            window.env = ((window.adTemp + (10 - window.adTemp) * window.cdp) * window.td).toFixed(1);
+            if (isNaN(window.env)) document.getElementById("env").innerText = "Укажите все метрики";
+            else document.getElementById("env").innerText = window.env;
+        }
+    }
+
+
+</script>
+<style>
+    .btn-group-toggle {
+        width: 100%
+    }
+    .card {
+        margin: auto;
+    }
+
+    .card-title {
+        margin: revert;
+    }
+
+</style>
+
